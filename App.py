@@ -10,6 +10,8 @@ if "colors" not in st.session_state:
         "Син": 0,
         "Зелен": 0,
         "Жълт": 0
+        "Черен": 0 
+        "Бяло": 0 
     }
 
 if "sports" not in st.session_state:
@@ -18,6 +20,8 @@ if "sports" not in st.session_state:
         "Баскетбол": 0,
         "Волейбол": 0,
         "Плуване": 0
+        "Бадминтон": 0
+    
     }
 
 st.subheader("Избери любими неща")
