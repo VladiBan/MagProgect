@@ -1,52 +1,38 @@
-import streamlit as st 
-import pandas as pd 
+import streamlit as st
+import pandas as pd
 
-st.title("Ocenki i uchenici")
+st.title("📊 Ученици и оценки – класна анкета")
 
 # Инициализация на данните
-if "Uchenici" not in st.session_state:
-    st.session_state.colors = {
-    "Georgi": 0,
-    "Zlati": 0,
-    "Mitko": 0,
-    " Vladislav": 0,
-    " Ivo": 0,
+if "students" not in st.session_state:
+    st.session_state.students = {
+        "Иван": [],
+        "Мария": [],
+        "Георги": [],
+        "Анна": []
     }
 
-if "Ocenki" not in st.session_state:
-    st.session_state.sports = {
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-        "6": 0,
+st.subheader("Въведи оценка")
 
-    }
+student = st.selectbox("Избери ученик:", list(st.session_state.students.keys()))
+grade = st.selectbox("Избери оценка:", [2, 3, 4, 5, 6])
 
-st.subheader("Избери любими неща")
-
-color = st.selectbox("Uchenik:", list(st.session_state.colors.keys()))
-sport = st.selectbox("Ocenka:", list(st.session_state.sports.keys()))
-
-if st.button("Запази избора"):
-    st.session_state.colors[color] += 1
-    st.session_state.sports[sport] += 1
-    st.success("Изборът е записан!")
+if st.button("Запази оценката"):
+    st.session_state.students[student].append(grade)
+    st.success("Оценката е записана!")
 
 st.divider()
 
 st.subheader("📈 Резултати")
 
-# Графика за цветовете
-st.write("UChenik")
-colors_df = pd.DataFrame.from_dict(
-    st.session_state.colors, orient="index", columns=["Брой"]
-)
-st.bar_chart(colors_df)
+# Средна оценка за всеки ученик
+average_grades = {
+    student: (sum(grades) / len(grades) if grades else 0)
+    for student, grades in st.session_state.students.items()
+}
 
-# Графика за спортовете
-st.write("Ocenka")
-sports_df = pd.DataFrame.from_dict(
-    st.session_state.sports, orient="index", columns=["Брой"]
+df = pd.DataFrame.from_dict(
+    average_grades, orient="index", columns=["Средна оценка"]
 )
-st.bar_chart(sports_df)
+
+st.bar_chart(df)
