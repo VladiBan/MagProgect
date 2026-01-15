@@ -1,27 +1,25 @@
-import streamlit as st
-import pandas as pd
+
 
 st.title("📊 Любими неща - класна анкета")
 
 # Инициализация на данните
-if "colors" not in st.session_state:
+if "Uchenici" not in st.session_state:
     st.session_state.colors = {
-        "Червен": 0,
-        "Син": 0,
-        "Зелен": 0,
-        "Жълт": 0,
-        "Черен": 0,
-        "Бяло": 0 
+    "Georgi": 0,
+    "Zlati": 0,
+    "Mitko": 0,
+    " Vladislav": 0,
+    " Ivo": 0,
     }
 
-if "sports" not in st.session_state:
+if "Ocenki" not in st.session_state:
     st.session_state.sports = {
-        "Футбол": 0,
-        "Баскетбол": 0,
-        "Волейбол": 0,
-        "Плуване": 0,
-        "Бадминтон": 0,
-    
+        "2": 0,
+        "3": 0,
+        "4": 0,
+        "5": 0,
+        "6": 0,
+
     }
 
 st.subheader("Избери любими неща")
